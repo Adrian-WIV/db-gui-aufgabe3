@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-def gui_layout():
+def gui_layout(suche_callback):
     root = tk.Tk()
     root.title("Aufgabe3")
     root.geometry("500x500")
@@ -11,11 +11,6 @@ def gui_layout():
         width = 50,
     )
 
-    suche = ttk.Button(
-        root,
-        text = "Suche",
-        command = suche    
-    )
 
     listbox = tk.Listbox(
         root,
@@ -24,19 +19,27 @@ def gui_layout():
 
     )
 
-    entry.pack()
-    suche.pack()
-    listbox.pack()
 
-def execute(entry):
-    
-    eingabe = entry.get().strip()
+    def execute():
+        
+        eingabe = entry.get().strip()
 
-    if eingabe =="":
-        messagebox.showerror("Fehler", "Eingabe darf nicht leer sein")
-        return
-    
-    entry.delete(0, tk.END)
+        if eingabe =="":
+            messagebox.showerror("Fehler", "Eingabe darf nicht leer sein")
+            return
+        
+        entry.delete(0, tk.END)
+        suche_callback(eingabe, listbox)
 
-    return eingabe
+        suche = ttk.Button(
+            root,
+            text = "Suche",
+            command = execute
+        )
+
+        entry.pack()
+        listbox.pack()
+        suche.pack()
+
+        root.mainloop()
 
