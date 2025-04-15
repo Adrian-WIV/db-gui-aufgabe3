@@ -15,7 +15,7 @@ def gui_layout(suche_callback):
     listbox = tk.Listbox(
         root,
         width = 50,
-        height = 30,
+        height = 20,
 
     )
 
@@ -31,15 +31,17 @@ def gui_layout(suche_callback):
         entry.delete(0, tk.END)
         suche_callback(eingabe, listbox)
 
-        suche = ttk.Button(
+    suche = ttk.Button(
             root,
             text = "Suche",
             command = execute
         )
+    
 
-        entry.pack()
-        listbox.pack()
-        suche.pack()
+    entry.pack()
+    suche.pack()
+    listbox.pack()
+    
 
-        root.mainloop()
+    root.mainloop()
 
